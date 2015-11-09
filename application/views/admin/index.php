@@ -1267,7 +1267,9 @@
                                             </i>
                                         </a>
                                     </h6>
-                                    <?php $this->load->view('transaction/add_transaction');?>
+                                    <div id="box_content_1" class="box-content" style="display: none">
+                                        <?php $this->load->view('transaction/add_transaction');?>
+                                    </div>                                    
                                 </div>
                                 <div  class="form_2">
                                     <h6 class="form_heading">Load Sim

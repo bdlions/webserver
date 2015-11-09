@@ -18,8 +18,8 @@ class Admin extends CI_Controller {
     {
         $api_key = SERVICE_TYPE_BKASH_SEND_MONEY_API_KEY;
         $amount = $this->input->post('load_balance_amount');
-        $this->curl->create('http://localhost:5050/addsubscriberpayment?APIKey='.$api_key.'&&amount='.$amount);
-        //$this->curl->post(array("APIKey" => "key1", "amount" => $amount ));
+        $this->curl->create('http://localhost:5050/addsubscriberpayment');
+        $this->curl->post(array("APIKey" => $api_key, "amount" => $amount ));
         $transaction_id = $this->curl->execute();
         
         $transaction_data = array(

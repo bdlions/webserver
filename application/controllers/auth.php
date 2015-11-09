@@ -104,7 +104,7 @@ class Auth extends CI_Controller {
                 'id' => 'password',
                 'type' => 'password',
                 'class' => 'form-control',
-                'placeholder' => 'Username'
+                'placeholder' => 'Password'
             );
 
             $this->template->load(NULL, LOGIN_TEMPLATE, $this->data);

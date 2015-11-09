@@ -26,7 +26,8 @@ class Transaction extends CI_Controller {
             'balance_out' => $amount,
             'cell_no' => $cell_no,
             'description' => $description,
-            'user_transaction_type_id' => TRANSACTION_TYPE_ID_USE_SERVICE
+            'user_transaction_type_id' => TRANSACTION_TYPE_ID_USE_SERVICE,
+            'user_transaction_status_id' => TRANSACTION_STATUS_ID_SUCCESSFUL
         );
         $this->transaction_model->add_transaction($transaction_data);
         

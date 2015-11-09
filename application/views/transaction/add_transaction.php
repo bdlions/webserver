@@ -22,7 +22,7 @@
     });
 </script>
 <?php echo form_open("transaction/add_transaction", array('id' => 'form_add_transaction', 'class' => 'form-horizontal','onsubmit' => 'return false;')); ?>
-<div id="box_content_1" class="box-content" style="display: none">
+
     <div class="row form-group">
         <div class="col-md-4">
             Mobile No.
@@ -54,5 +54,5 @@
             </a>
         </div>
     </div>
-</div>
+
 <?php echo form_close(); ?>

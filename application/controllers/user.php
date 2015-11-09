@@ -42,19 +42,28 @@ class User extends CI_Controller {
     
     public function create_subagent()
     {
-        $agent_user_id = 3;
-        $username = "c3";
-        $password = "d3";
+        $agent_user_id = $this->session->userdata('user_id');
+        $username = $this->input->post('username_create_subagaent');
+        $password = $this->input->post('password_create_subagaent');
         $email = "";
         $additional_data = array(
-            'first_name' => 'first name3',
-            'last_name' => 'last name3',
+            'first_name' => $this->input->post('first_name_create_subagaent'),
+            'last_name' => $this->input->post('last_name_create_subagaent'),
             'service_id' => SERVICE_TYPE_ID_BKASH_SEND_MONEY,
-            'commission' => 1,
+            'commission' => $this->input->post('commission_create_subagent'),
             'agent_user_id' => $agent_user_id
         );
         $groups = array(GROUP_ID_SUBAGENT);
         $this->ion_auth->register($username, $password, $email, $additional_data, $groups);
+        
+        $this->curl->create('http://localhost:5050/registermember?username='.$username.'&&subscribername='.ADMIN_USER_NAME);
+        //$this->curl->post(array("APIKey" => "key1", "amount" => $amount ));
+        $this->curl->execute();
+        
+        $response = array(
+            'message' => 'Subagent is created successfully.'
+        );
+        echo json_encode($response);
     }
     
     public function show_agents()
