@@ -1181,7 +1181,7 @@
                                 </div>
                                 <div class="box-content">
                                     <ul class="nav nav-tabs" id="myTab">
-                                        <li class="active"><a href="#info">Role</a></li>
+<!--                                        <li class="active"><a href="#info">Role</a></li>-->
                                         <li><a href="#custom">Agent</a></li>
                                     </ul>
 
@@ -1218,35 +1218,7 @@
 
                                 </div>
                                 <div class="box-content">
-                                    <div class="row form-group transfer_credit_pad">
-                                        <div class="col-md-5">
-                                            Select Agent
-                                        </div>
-                                        <div class="col-md-7">
-                                            <select class="form-control select_form_control_custom">
-                                                <option value="Agent_1">Agent 1</option>
-                                                <option value="Agent_2">Agent 2</option>
-                                                <option value="Agent_3">Agent 3</option>
-                                                <option value="Agent_4">Agent 4</option>
-                                                <option value="Agent_5">Agent 5</option>
-                                            </select> 
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-md-5">
-                                            Amount
-                                        </div>
-                                        <div class="col-md-7">
-                                            <input type="text" class="form-control form_control_custom">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-offset-7 col-md-5">
-                                            <a class="ajax-link">
-                                                <input type="button" class="btn btn-sm btn-default  pull-right" value="Transfer">
-                                            </a>
-                                        </div>
-                                    </div>
+                                    <?php $this->load->view('admin/agent/transfer_credit');?>
                                 </div>
                             </div>
                         </div>

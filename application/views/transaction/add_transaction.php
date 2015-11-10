@@ -15,6 +15,8 @@
                 url: '<?php echo base_url(); ?>transaction/add_transaction',
                 data: $("#form_add_transaction").serializeArray(),
                 success: function(data) {
+                    $("#add_transaction_cell_no").val(""); 
+                    $("#add_transaction_amount").val(""); 
                     alert(data.message);
                 }
             });

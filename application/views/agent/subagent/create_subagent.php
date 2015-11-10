@@ -27,6 +27,11 @@
                 url: '<?php echo base_url(); ?>user/create_subagent',
                 data: $("#form_create_subagent").serializeArray(),
                 success: function(data) {
+                    $("#first_name_create_subagaent").val(""); 
+                    $("#last_name_create_subagaent").val(""); 
+                    $("#username_create_subagaent").val(""); 
+                    $("#password_create_subagaent").val(""); 
+                    $("#commission_create_subagent").val(""); 
                     alert(data.message);
                 }
             });
@@ -66,7 +71,7 @@
         <input id="password_create_subagaent" name="password_create_subagaent" type="password" class="form-control form_control_custom">
     </div>
 </div>
-<div class="row form-group">
+<!--<div class="row form-group">
     <div class="col-md-5">
         Roles
     </div>
@@ -81,7 +86,7 @@
             <li><input type="checkbox" name="vehicle" value="Bike"> Roles 7</li>
         </ul>
     </div>
-</div>
+</div>-->
 <div class="row form-group">
     <div class="col-md-5">
         Commission

@@ -730,39 +730,11 @@
                     <div class="box col-md-4">
                         <div class="box-inner homepage-box">
                             <div class="box-header well" data-original-title="">
-                                <h2><i class="glyphicon glyphicon-transfer"></i> Transfer Credit to Sub-agent</h2>
+                                <h2><i class="glyphicon glyphicon-transfer"></i> Transfer Credit to Subagent</h2>
 
                             </div>
                             <div class="box-content agent-homepage-box">
-                                <div class="row form-group transfer_credit_pad">
-                                    <div class="col-md-5">
-                                        Select Sub-agent
-                                    </div>
-                                    <div class="col-md-7">
-                                        <select class="form-control select_form_control_custom">
-                                            <option value="Sub-agent_1">Sub-agent 1</option>
-                                            <option value="Sub-agent_2">Sub-agent 2</option>
-                                            <option value="Sub-agent_3">Sub-agent 3</option>
-                                            <option value="Sub-agent_4">Sub-agent 4</option>
-                                            <option value="Sub-agent_5">Sub-agent 5</option>
-                                        </select> 
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col-md-5">
-                                        Amount
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input type="text" class="form-control form_control_custom">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-offset-7 col-md-5">
-                                        <a class="ajax-link">
-                                            <input type="button" class="btn btn-sm btn-default  pull-right" value="Transfer">
-                                        </a>
-                                    </div>
-                                </div>
+                                <?php $this->load->view('agent/subagent/transfer_credit');?>
                             </div>
                         </div>
                     </div>

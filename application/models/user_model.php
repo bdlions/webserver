@@ -7,7 +7,7 @@ class User_model extends Ion_auth_model
     
     public function get_all_agents()
     {
-        $this->db->where($this->tables['groups'].'.id', 3);
+        $this->db->where($this->tables['groups'].'.id', GROUP_ID_AGENT);
         return $this->db->select($this->tables['users'].'.id as user_id,'.$this->tables['users'].'.*')
             ->from($this->tables['users'])
             ->join($this->tables['users_groups'],  $this->tables['users_groups'].'.user_id='.$this->tables['users'].'.id')

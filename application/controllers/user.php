@@ -5,6 +5,8 @@ class User extends CI_Controller {
         parent::__construct();
         $this->load->library('ion_auth');
         $this->load->model('user_model');
+        $this->load->model('transaction_model');
+        $this->load->library('Utils');
     }
     public function index()
     {
@@ -62,6 +64,37 @@ class User extends CI_Controller {
         
         $response = array(
             'message' => 'Subagent is created successfully.'
+        );
+        echo json_encode($response);
+    }
+    
+    public function transfer_subagent_credit()
+    {
+        $transaction_id = $this->utils->generateRandomString();
+        $agent_user_id = $this->session->userdata('user_id');
+        $subagent_user_id = $this->input->post('subagent_list');
+        $amount = $this->input->post('subagent_credit_amount');
+        
+        
+        $agent_transaction_data = array(
+            'user_id' => $agent_user_id,
+            'transaction_id' => $transaction_id,
+            'service_id' => SERVICE_TYPE_ID_BKASH_SEND_MONEY,
+            'balance_in' => $amount,
+            'user_transaction_type_id' => TRANSACTION_TYPE_ID_SEND_CREDIT
+        );
+        $this->transaction_model->add_transaction($agent_transaction_data);
+        $subagent_transaction_data = array(
+            'user_id' => $subagent_user_id,
+            'transaction_id' => $transaction_id,
+            'service_id' => SERVICE_TYPE_ID_BKASH_SEND_MONEY,
+            'balance_in' => $amount,
+            'user_transaction_type_id' => TRANSACTION_TYPE_ID_RECEIVE_CREDIT
+        );
+        $this->transaction_model->add_transaction($subagent_transaction_data);
+        
+        $response = array(
+            'message' => 'Credit is transferred successfully.'
         );
         echo json_encode($response);
     }

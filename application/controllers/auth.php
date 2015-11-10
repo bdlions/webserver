@@ -8,6 +8,7 @@ class Auth extends CI_Controller {
         parent::__construct();
         $this->load->library('ion_auth');
         $this->load->library('form_validation');
+        $this->load->model('user_model');
         $this->load->helper('url');
 
         // Load MongoDB library instead of native db driver if required
@@ -39,20 +40,37 @@ class Auth extends CI_Controller {
                     foreach ($this->data['users'] as $k => $user) {
                         $this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
                     }
+                    
+                    $agent_list_array = $this->user_model->get_all_agents()->result_array();
+                    $agent_list = array();
+                    foreach($agent_list_array as $agent_info)
+                    {
+                        $agent_list[$agent_info['user_id']] = $agent_info['first_name'].' '.$agent_info['last_name'];
+                    }
+                    $this->data['agent_list'] = $agent_list;
 
                     //$this->_render_page('auth/index', $this->data);
                     $this->template->load(NULL, ADMIN_LOGIN_SUCCESS_VIEW, $this->data);
                     break;
                 }
-                elseif($group == MEMBER){
+                else if($group == MEMBER){
                     $this->template->load(NULL, MEMBER_LOGIN_SUCCESS_VIEW);
                     break;
                 }
-                elseif($group == AGENT){
-                    $this->template->load(NULL, AGENT_LOGIN_SUCCESS_VIEW);
+                else if($group == AGENT){
+                    
+                    $agent_user_id = $this->session->userdata('user_id');
+                    $subagent_list_array = $this->user_model->get_all_subagents($agent_user_id)->result_array();
+                    $subagent_list = array();
+                    foreach($subagent_list_array as $subagent_info)
+                    {
+                        $subagent_list[$subagent_info['user_id']] = $subagent_info['first_name'].' '.$subagent_info['last_name'];
+                    }
+                    $this->data['subagent_list'] = $subagent_list;
+                    $this->template->load(NULL, AGENT_LOGIN_SUCCESS_VIEW, $this->data);
                     break;
                 }
-                elseif($group == SUBAGENT){
+                else if($group == SUBAGENT){
                     $this->template->load(NULL, SUBAGENT_LOGIN_SUCCESS_VIEW);
                     break;
                 }

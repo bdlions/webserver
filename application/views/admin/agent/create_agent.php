@@ -27,6 +27,11 @@
                 url: '<?php echo base_url(); ?>user/create_agent',
                 data: $("#form_create_agent").serializeArray(),
                 success: function(data) {
+                    $("#first_name_create_agaent").val(""); 
+                    $("#last_name_create_agaent").val(""); 
+                    $("#username_create_agaent").val(""); 
+                    $("#password_create_agaent").val(""); 
+                    $("#commission_create_agent").val(""); 
                     alert(data.message);
                 }
             });
@@ -66,7 +71,7 @@
             <input id="password_create_agaent" name="password_create_agaent" type="password" class="form-control form_control_custom">
         </div>
     </div>
-    <div class="row form-group">
+<!--    <div class="row form-group">
         <div class="col-md-4">
             Roles
         </div>
@@ -81,7 +86,7 @@
                 <li><input type="checkbox" name="vehicle" value="Bike"> Roles 7</li>
             </ul>
         </div>
-    </div>
+    </div>-->
     <div class="row form-group">
         <div class="col-md-4">
             Commission
