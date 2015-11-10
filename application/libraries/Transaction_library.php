@@ -9,6 +9,7 @@ if (!defined('BASEPATH'))
 class Transaction_library {
     public function __construct() {
         $this->load->model('transaction_model');
+        $this->load->model('user_model');
         $this->load->library('Date_utils');
     }
 
@@ -89,4 +90,78 @@ class Transaction_library {
         return $transaction_list;
     }
 
+    public function get_dashboard_summary()
+    {
+        $start_time = $this->date_utils->get_current_date_start_time();
+        $end_time = $start_time + 86400;
+        
+        $total_agents = 0;
+        $total_agents_array = $this->user_model->get_total_agents()->result_array();
+        if(!empty($total_agents_array))
+        {
+            $total_agents = $total_agents_array[0]['total_agents'];
+        }
+        
+        $total_agents_today = 0;
+        $total_agents_today_array = $this->user_model->get_total_agents_today($start_time, $end_time)->result_array();
+        if(!empty($total_agents_today_array))
+        {
+            $total_agents_today = $total_agents_today_array[0]['total_agents'];
+        }
+        
+        $total_subagents = 0;
+        $total_subagents_array = $this->user_model->get_total_subagents()->result_array();
+        if(!empty($total_subagents_array))
+        {
+            $total_subagents = $total_subagents_array[0]['total_subagents'];
+        }
+        
+        $total_subagents_today = 0;
+        $total_subagents_today_array = $this->user_model->get_total_subagents_today($start_time, $end_time)->result_array();
+        if(!empty($total_subagents_today_array))
+        {
+            $total_subagents_today = $total_subagents_today_array[0]['total_subagents'];
+        }
+        
+        $agents_total_transactions = 0;
+        $agents_total_transactions_array = $this->transaction_model->get_agents_total_transactions()->result_array();
+        if(!empty($agents_total_transactions_array))
+        {
+            $agents_total_transactions = $agents_total_transactions_array[0]['total_transactions'];
+        }
+        
+        $agents_total_transactions_today = 0;
+        $agents_total_transactions_today_array = $this->transaction_model->get_agents_total_transactions($start_time, $end_time)->result_array();
+        if(!empty($agents_total_transactions_today_array))
+        {
+            $agents_total_transactions_today = $agents_total_transactions_today_array[0]['total_transactions'];
+        }
+        
+        $subagents_total_transactions = 0;
+        $subagents_total_transactions_array = $this->transaction_model->get_subagents_total_transactions()->result_array();
+        if(!empty($subagents_total_transactions_array))
+        {
+            $subagents_total_transactions = $subagents_total_transactions_array[0]['total_transactions'];
+        }
+        
+        $subagents_total_transactions_today = 0;
+        $subagents_total_transactions_today_array = $this->transaction_model->get_subagents_total_transactions($start_time, $end_time)->result_array();
+        if(!empty($subagents_total_transactions_today_array))
+        {
+            $subagents_total_transactions_today = $subagents_total_transactions_today_array[0]['total_transactions'];
+        }
+        
+        $result = array(
+            'total_agents' => $total_agents,
+            'total_agents_today' => $total_agents_today,
+            'total_subagents' => $total_subagents,
+            'total_subagents_today' => $total_subagents_today,
+            'total_agent_transactions' => $agents_total_transactions,
+            'total_agent_transactions_today' => $agents_total_transactions_today,
+            'total_subagent_transactions' => $subagents_total_transactions,
+            'total_subagent_transactions_today' => $subagents_total_transactions_today
+        );
+        return $result;
+    }
+    
 }

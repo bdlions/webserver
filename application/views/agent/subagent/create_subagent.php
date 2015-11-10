@@ -27,12 +27,13 @@
                 url: '<?php echo base_url(); ?>user/create_subagent',
                 data: $("#form_create_subagent").serializeArray(),
                 success: function(data) {
-                    $("#first_name_create_subagaent").val(""); 
-                    $("#last_name_create_subagaent").val(""); 
-                    $("#username_create_subagaent").val(""); 
-                    $("#password_create_subagaent").val(""); 
-                    $("#commission_create_subagent").val(""); 
+//                    $("#first_name_create_subagaent").val(""); 
+//                    $("#last_name_create_subagaent").val(""); 
+//                    $("#username_create_subagaent").val(""); 
+//                    $("#password_create_subagaent").val(""); 
+//                    $("#commission_create_subagent").val(""); 
                     alert(data.message);
+                    window.location = '<?php echo base_url(); ?>';
                 }
             });
         });    

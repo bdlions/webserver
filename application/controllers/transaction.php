@@ -23,6 +23,7 @@ class Transaction extends CI_Controller {
             'user_id' => $this->session->userdata('user_id'),
             'transaction_id' => $transaction_id,
             'service_id' => SERVICE_TYPE_ID_BKASH_SEND_MONEY,
+            'balance_in' => 0,
             'balance_out' => $amount,
             'cell_no' => $cell_no,
             'description' => $description,

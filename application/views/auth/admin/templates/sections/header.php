@@ -1,13 +1,13 @@
 <div class="navbar navbar-default">
     <div class="navbar-inner">
 
-        <a class="navbar-brand" href="http://www.bkash.com/" target="_blank"> <img alt="bKash Logo" src="resources/images/bkashLogo.png" class="hidden-xs"/>
+        <a class="navbar-brand" href="<?php echo base_url()?>"> <img alt="bKash Logo" src="resources/images/bkashLogo.png" class="hidden-xs"/>
             <span>bKash</span></a>
 
         <!-- user dropdown starts -->
         <div class="btn-group pull-right">
             <button class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
-                <i class="glyphicon glyphicon-user blue"></i><span class="hidden-sm hidden-xs"> admin</span>
+                <i class="glyphicon glyphicon-user blue"></i><span class="hidden-sm hidden-xs"><?php echo $user_info['first_name'].' '.$user_info['last_name']?></span>
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">

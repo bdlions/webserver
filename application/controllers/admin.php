@@ -51,7 +51,8 @@ class Admin extends CI_Controller {
             'user_id' => $user_id,
             'transaction_id' => $transaction_id,
             'service_id' => SERVICE_TYPE_ID_BKASH_SEND_MONEY,
-            'balance_in' => $amount,
+            'balance_in' => 0,
+            'balance_out' => $amount,
             'user_transaction_type_id' => TRANSACTION_TYPE_ID_SEND_CREDIT
         );
         $this->transaction_model->add_transaction($admin_transaction_data);
@@ -60,6 +61,7 @@ class Admin extends CI_Controller {
             'transaction_id' => $transaction_id,
             'service_id' => SERVICE_TYPE_ID_BKASH_SEND_MONEY,
             'balance_in' => $amount,
+            'balance_out' => 0,
             'user_transaction_type_id' => TRANSACTION_TYPE_ID_RECEIVE_CREDIT
         );
         $this->transaction_model->add_transaction($agent_transaction_data);

@@ -1,12 +1,10 @@
 <script>
     $(function() {
-        $("#agent_list_subagent_balances").change(function() {
-            get_subagent_current_balances();
-        });
+        
     });
     function get_subagent_current_balances()
     {
-        var agent_user_id = $('#agent_list_subagent_balances').val();
+        var agent_user_id = '<?php echo $user_info['user_id']?>';
         if(agent_user_id > 0)
         {
             $.ajax({
@@ -43,14 +41,6 @@
     <div class="demo">
         <div class="scrollbar-macosx">
             <div class="box-content">
-                <div class="row">
-                <div class="col-md-12">
-                        <label>
-                            <?php echo form_dropdown('agent_list_subagent_balances', array('' => 'Select agent')+$agent_list, '', 'class=form-control id=agent_list_subagent_balances'); ?>
-                        </label>
-                    </div>
-                    </div>
-
                 <table class="table table-striped table-bordered responsive">
                     <thead>
                         <tr>

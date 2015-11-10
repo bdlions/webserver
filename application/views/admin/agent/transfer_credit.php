@@ -11,8 +11,9 @@
                 url: '<?php echo base_url(); ?>admin/transfer_agent_credit',
                 data: $("#form_transfer_agent_credit").serializeArray(),
                 success: function(data) {
-                    $("#agent_credit_amount").val(""); 
+                    //$("#agent_credit_amount").val(""); 
                     alert(data.message);
+                    window.location = '<?php echo base_url(); ?>';
                 }
             });
         });    

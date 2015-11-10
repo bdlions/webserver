@@ -11,8 +11,9 @@
                 url: '<?php echo base_url(); ?>admin/load_balance',
                 data: $("#form_load_balance").serializeArray(),
                 success: function(data) {
-                    $("#load_balance_amount").val(""); 
+                    //$("#load_balance_amount").val(""); 
                     alert(data.message);
+                    window.location = '<?php echo base_url(); ?>';
                 }
             });
         });    

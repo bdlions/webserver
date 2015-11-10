@@ -11,8 +11,9 @@
                 url: '<?php echo base_url(); ?>user/transfer_subagent_credit',
                 data: $("#form_transfer_subagent_credit").serializeArray(),
                 success: function(data) {
-                    $("#subagent_credit_amount").val(""); 
+                    //$("#subagent_credit_amount").val(""); 
                     alert(data.message);
+                    window.location = '<?php echo base_url(); ?>';
                 }
             });
         });    

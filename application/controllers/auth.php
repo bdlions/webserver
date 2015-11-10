@@ -9,6 +9,7 @@ class Auth extends CI_Controller {
         $this->load->library('ion_auth');
         $this->load->library('form_validation');
         $this->load->model('user_model');
+        $this->load->library('Transaction_library');
         $this->load->helper('url');
 
         // Load MongoDB library instead of native db driver if required
@@ -29,6 +30,13 @@ class Auth extends CI_Controller {
             //redirect them to the login page
             redirect('auth/login', 'refresh');
         } else {
+            $user_id = $this->session->userdata('user_id');
+            $user_info_array = $this->user_model->get_user_info($user_id)->result_array();
+            if(!empty($user_info_array))
+            {
+                $this->data['user_info'] = $user_info_array[0];
+            } 
+            
             $user_group = $this->ion_auth->get_current_user_types();
             foreach ($user_group as $group) {
                 if($group == ADMIN){
@@ -36,10 +44,12 @@ class Auth extends CI_Controller {
                     $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
                     //list the users
-                    $this->data['users'] = $this->ion_auth->users()->result();
-                    foreach ($this->data['users'] as $k => $user) {
-                        $this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
-                    }
+//                    $this->data['users'] = $this->ion_auth->users()->result();
+//                    foreach ($this->data['users'] as $k => $user) {
+//                        $this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
+//                    }    
+                    
+                    $this->data = array_merge($this->data, $this->transaction_library->get_dashboard_summary());
                     
                     $agent_list_array = $this->user_model->get_all_agents()->result_array();
                     $agent_list = array();
@@ -71,7 +81,7 @@ class Auth extends CI_Controller {
                     break;
                 }
                 else if($group == SUBAGENT){
-                    $this->template->load(NULL, SUBAGENT_LOGIN_SUCCESS_VIEW);
+                    $this->template->load(NULL, SUBAGENT_LOGIN_SUCCESS_VIEW, $this->data);
                     break;
                 }
                 else{

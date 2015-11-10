@@ -80,7 +80,8 @@ class User extends CI_Controller {
             'user_id' => $agent_user_id,
             'transaction_id' => $transaction_id,
             'service_id' => SERVICE_TYPE_ID_BKASH_SEND_MONEY,
-            'balance_in' => $amount,
+            'balance_out' => $amount,
+            'balance_in' => 0,
             'user_transaction_type_id' => TRANSACTION_TYPE_ID_SEND_CREDIT
         );
         $this->transaction_model->add_transaction($agent_transaction_data);
@@ -89,6 +90,7 @@ class User extends CI_Controller {
             'transaction_id' => $transaction_id,
             'service_id' => SERVICE_TYPE_ID_BKASH_SEND_MONEY,
             'balance_in' => $amount,
+            'balance_out' => 0,
             'user_transaction_type_id' => TRANSACTION_TYPE_ID_RECEIVE_CREDIT
         );
         $this->transaction_model->add_transaction($subagent_transaction_data);
@@ -113,6 +115,16 @@ class User extends CI_Controller {
         $subagent_list = $this->transaction_model->get_subagents_current_balance($agent_user_id)->result_array();
         $result = array(
             'subagent_list' => $subagent_list
+        );
+        echo json_encode($result);
+    }
+    
+    public function get_subagent_list()
+    {
+        $agent_user_id = $this->input->post('agent_user_id');
+        $subagent_list_array = $this->user_model->get_all_subagents($agent_user_id)->result_array();
+        $result = array(
+            'subagent_list' => $subagent_list_array
         );
         echo json_encode($result);
     }

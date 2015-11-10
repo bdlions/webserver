@@ -163,8 +163,11 @@ CREATE TABLE IF NOT EXISTS `users_commissions` (
   `user_id` int(11) unsigned NOT NULL,
   `service_id` int(11) unsigned NOT NULL,
   `commission` double,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `fk_users_commissions_users1_idx` (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `users_commissions`
+  ADD CONSTRAINT `fk_users_commissions_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 INSERT INTO `users_commissions` (`id`, `user_id`, `service_id`, `commission`) VALUES
 (1, 2, 1, 1),
 (2, 3, 1, 1),

@@ -1,41 +1,6 @@
 <script>
     $(function() {
-        $("#admin_list_transactions").change(function() {
-            var user_id = $('#admin_list_transactions').val();
-            if(user_id > 0)
-            {
-                $('#agent_list_transactions').val('');
-                $('#subagent_list_transactions').val('');
-                get_user_transaction_list(user_id);
-            }
-        });
-        $("#agent_list_transactions").change(function() {
-            var agent_user_id = $('#agent_list_transactions').val();
-            if(agent_user_id > 0)
-            {
-                $('#admin_list_transactions').val('');    
-                get_user_transaction_list(agent_user_id);
-                $.ajax({
-                    dataType: 'json',
-                    type: "POST",
-                    url: '<?php echo base_url(); ?>user/get_subagent_list',
-                    data: {
-                        agent_user_id: agent_user_id
-                    },
-                    success: function(data) {
-                        $('#subagent_list_transactions').html(tmpl('tlmp_subagent_list_transaction', data.subagent_list));
-                    }
-                });
-            }
-        });
-        $("#subagent_list_transactions").change(function() {
-            var subagent_user_id = $('#subagent_list_transactions').val();
-            if(subagent_user_id > 0)
-            {
-                $('#admin_list_transactions').val('');    
-                get_user_transaction_list(subagent_user_id);                
-            }
-        });
+        
     });
     function get_user_transaction_list(user_id)
     {
@@ -65,41 +30,11 @@
     {% transaction_info = ((o instanceof Array) ? o[i++] : null); %}
     {% } %}
 </script>
-<script type="text/x-tmpl" id="tlmp_subagent_list_transaction">
-    {% var i=0, subagent_info = ((o instanceof Array) ? o[i++] : o); %}
-    <option value="" selected="selected">Select a Subagents</option>
-    {% while(subagent_info){ %}
-        <option value="{%= subagent_info.user_id %}">{%= subagent_info.first_name %} {%= subagent_info.last_name %}</option>
-    {% subagent_info = ((o instanceof Array) ? o[i++] : null); %}
-    {% } %}
-</script>
 <div class="content">
     <div class="demo">
         <div class="scrollbar-macosx">
             <div class="scroll_top">
             <div class="box-content">
-                <div class="row form-group">
-                    <div class="col-md-offset-1 col-md-3 pull-left">
-                        <label>
-                            <?php echo form_dropdown('agent_list_transactions', array('' => 'Select agent')+$agent_list, '', 'class=form-control id=agent_list_transactions'); ?>
-                        </label>
-                    </div>
-                    <div class="col-md-3">
-                        <label>
-                            <select id="subagent_list_transactions" name="subagent_list_transactions" class="form-control form_control_custom">
-                                <option value="" selected="selected">Select a Subagents</option>                                
-                            </select>
-                        </label>
-                    </div>
-                   <div class="col-md-3">
-                        <label>
-                                <select id="admin_list_transactions" name="admin_list_transactions" class="form-control form_control_custom">
-                                    <option value="" selected="selected">Select</option>
-                                    <option value="<?php echo $user_info['user_id']?>"><?php echo $user_info['first_name'].' '.$user_info['last_name']?></option>
-                                </select>
-                            </label>
-                    </div>
-                </div>
 <!--                <div class="row">
                     <div class="col-md-offset-1 col-md-2">
                         <div class="start_datepicker">

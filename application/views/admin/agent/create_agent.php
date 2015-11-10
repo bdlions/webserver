@@ -26,13 +26,14 @@
                 type: "POST",
                 url: '<?php echo base_url(); ?>user/create_agent',
                 data: $("#form_create_agent").serializeArray(),
-                success: function(data) {
-                    $("#first_name_create_agaent").val(""); 
-                    $("#last_name_create_agaent").val(""); 
-                    $("#username_create_agaent").val(""); 
-                    $("#password_create_agaent").val(""); 
-                    $("#commission_create_agent").val(""); 
+                success: function(data) {                    
+//                    $("#first_name_create_agaent").val(""); 
+//                    $("#last_name_create_agaent").val(""); 
+//                    $("#username_create_agaent").val(""); 
+//                    $("#password_create_agaent").val(""); 
+//                    $("#commission_create_agent").val(""); 
                     alert(data.message);
+                    window.location = '<?php echo base_url(); ?>';
                 }
             });
         });    
