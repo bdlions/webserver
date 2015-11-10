@@ -28,25 +28,30 @@
                 $("#nav_agent").click(function() {
                     $('.display_hidden').css("display", "none");
                     $("#agent").show();
+                    get_agent_current_balances();
                 });
 
                 $("#nav_subagent").click(function() {
                     $('.display_hidden').css("display", "none");
                     $("#subagent").show();
+                    get_subagent_current_balances();
                 });
 
                 $("#nav_transaction_history").click(function() {
                     $('.display_hidden').css("display", "none");
                     $("#transaction_history").show();
+                    get_user_transaction_list();
                 });
 
                 $("#nav_balance_history").click(function() {
                     $('.display_hidden').css("display", "none");
                     $("#balance_history").show();
+                    get_credit_transfer_list();
                 });
                 $("#nav_sim_recharge_history").click(function() {
                     $('.display_hidden').css("display", "none");
                     $("#sim_recharge_history").show();
+                    get_load_balance_list();
                 });
                 $("#nav_profit_summary").click(function() {
                     $('.display_hidden').css("display", "none");
@@ -106,11 +111,11 @@
                                 <li class="nav-header glyphicon glyphicon-home"> Main</li>
                                 <li id="nav_agent"><a class="ajax-link"><i class="glyphicon glyphicon-user"></i><span> Agents</span></a>
                                 </li>
-                                <li id="nav_subagent"><a class="ajax-link"><i class="glyphicon glyphicon-user"></i><span> Sub-agents</span></a>
+                                <li id="nav_subagent"><a class="ajax-link"><i class="glyphicon glyphicon-user"></i><span> Subagents</span></a>
                                 </li>
                                 <li id="nav_transaction_history"><a class="ajax-link"><i class="glyphicon glyphicon-minus-sign"></i><span> Transaction History</span></a>
                                 </li>
-                                <li id="nav_balance_history"><a class="ajax-link"><i class="glyphicon glyphicon-star"></i> Balance History</a>
+                                <li id="nav_balance_history"><a class="ajax-link"><i class="glyphicon glyphicon-star"></i>Credit Transfer History</a>
                                 </li>
                                 <li id="nav_sim_recharge_history"><a class="ajax-link"><i class="glyphicon glyphicon-plus-sign"></i><span> Sim Recharge History</span></a>
                                 </li>
@@ -179,122 +184,7 @@
                                 <div class="box-header well">
                                     <h2><i class="glyphicon glyphicon-user green"></i> Show Agents</h2>
                                 </div>
-                                <div class="content">
-                                    <div class="demo">
-                                        <div class="scrollbar-macosx">
-                                            <div class="box-content">
-                                                <table class="table table-striped table-bordered responsive">
-                                                    <thead>
-                                                        <tr>
-                                                            <th >Login ID</th>
-                                                            <th >Username</th>
-                                                            <th >Current Balance (Tk.)</th>
-                                                            <th class="center">Transaction History</th>
-                                                            <th class="center">Balance History</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>Nazmul Hasan</td>
-                                                            <td >1000</td>
-                                                           <td class="center"><a class="transaction_history_preview">View</a></td>
-                                                            <td class="center"><a class="balance_history_preview">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>Alamgir Kabir</td>
-                                                            <td>1500</td>
-                                                            <td class="center"><a class="transaction_history_preview">View</a></td>
-                                                            <td class="center"><a class="balance_history_preview">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>Mohammad Ali</td>
-                                                            <td>2000</td>
-                                                            <td class="center"><a class="transaction_history_preview">View</a></td>
-                                                            <td class="center"><a class="balance_history_preview">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4</td>
-                                                            <td>Abdul Wadud</td>
-                                                            <td>2500</td>
-                                                            <td class="center"><a class="transaction_history_preview">View</a></td>
-                                                            <td class="center"><a class="balance_history_preview">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>5</td>
-                                                            <td>Omar Sany</td>
-                                                            <td>3000</td>
-                                                            <td class="center"><a class="transaction_history_preview">View</a></td>
-                                                            <td class="center"><a class="balance_history_preview">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>6</td>
-                                                            <td>Mohammad Ashraful</td>
-                                                            <td>3500</td>
-                                                           <td class="center"><a class="transaction_history_preview">View</a></td>
-                                                            <td class="center"><a class="balance_history_preview">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>7</td>
-                                                            <td>Aftab Ahmed</td>
-                                                            <td>4000</td>
-                                                           <td class="center"><a class="transaction_history_preview">View</a></td>
-                                                            <td class="center"><a class="balance_history_preview">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>8</td>
-                                                            <td>Mir Nasir Ali</td>
-                                                            <td>4500</td>
-                                                            <td class="center"><a class="transaction_history_preview">View</a></td>
-                                                            <td class="center"><a class="balance_history_preview">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>9</td>
-                                                            <td>Saddma Hossain</td>
-                                                            <td>5000</td>
-                                                           <td class="center"><a class="transaction_history_preview">View</a></td>
-                                                            <td class="center"><a class="balance_history_preview">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>10</td>
-                                                            <td>Abdur Rahim</td>
-                                                            <td>5500</td>
-                                                            <td class="center"><a class="transaction_history_preview">View</a></td>
-                                                            <td class="center"><a class="balance_history_preview">View</a></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 center-block pagination_pad">
-
-                                    <div class="pagination">
-                                        <ul class="pagination">
-                                            <li class="prev disabled">
-                                                <a href="#"> Previous</a>
-                                            </li>
-                                            <li class="active">
-                                                <a href="#">1</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">2</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">3</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">4</a>
-                                            </li>
-                                            <li class="next">
-                                                <a href="#">Next  </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                <?php $this->load->view('admin/report/show_agents')?>
                             </div>
                         </div>
                     </div>
@@ -305,143 +195,9 @@
                         <div class="box box_height col-md-12">
                             <div class="box-inner">
                                 <div class="box-header well">
-                                    <h2><i class="glyphicon glyphicon-user yellow"></i> Show Sub-agent</h2>
+                                    <h2><i class="glyphicon glyphicon-user yellow"></i> Show Subagent</h2>
                                 </div>
-                                <div class="content">
-                                    <div class="demo">
-                                        <div class="scrollbar-macosx">
-                                            <div class="box-content">
-                                                <div class="row">
-                                                <div class="col-md-12">
-                                                        <label>
-                                                            <select class="form-control form_control_custom">
-                                                                <option selected="selected">Select an Agent</option>
-                                                                <option value="0">Nazmul Hasan</option>
-                                                                <option value="1">Alamgir Kabir</option>
-                                                                <option value="2">Mohammad Ali</option>
-                                                                <option value="3">Abdul Wadud</option>
-                                                                <option value="4">Omar Sany</option>
-                                                                <option value="5">Mohammad Ashraful</option>
-                                                                <option value="6">Aftab Ahmed</option>
-                                                                <option value="7">Mir Nasir Ali</option>
-                                                                <option value="8">Saddma Hossain</option>
-                                                                <option value="9">Abdur Rahim</option>
-                                                            </select>
-                                                        </label>
-                                                    </div>
-                                                    </div>
-                                                
-                                                <table class="table table-striped table-bordered responsive">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Login ID</th>
-                                                            <th>Username</th>
-                                                            <th>Current Balance (Tk.)</th>
-                                                            <th class="center">Transaction History</th>
-                                                            <th class="center">Balance History</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td >1</td>
-                                                            <td>Sakib Al Hasan</td>
-                                                            <td >500</td>
-                                                            <td class="center"><a class="transaction_history_preview">View</a></td>
-                                                            <td class="center"><a class="balance_history_preview">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td >2</td>
-                                                            <td>Tamim Iqbal</td>
-                                                            <td >1000</td>
-                                                            <td class="center"><a class="transaction_history_preview">View</a></td>
-                                                            <td class="center"><a class="balance_history_preview">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td >3</td>
-                                                            <td>Sabbir Rahman</td>
-                                                            <td >1500</td>
-                                                            <td class="center"><a class="transaction_history_preview">View</a></td>
-                                                            <td class="center"><a class="balance_history_preview">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td >4</td>
-                                                            <td>Mominul Haque</td>
-                                                            <td >2000</td>
-                                                            <td class="center"><a class="transaction_history_preview">View</a></td>
-                                                            <td class="center"><a class="balance_history_preview">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td >5</td>
-                                                            <td>Souma Sarkar</td>
-                                                            <td >2500</td>
-                                                            <td class="center"><a class="transaction_history_preview">View</a></td>
-                                                            <td class="center"><a class="balance_history_preview">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td >6</td>
-                                                            <td>Taskin Ahmed</td>
-                                                            <td >3000</td>
-                                                            <td class="center"><a class="transaction_history_preview">View</a></td>
-                                                            <td class="center"><a class="balance_history_preview">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td >7</td>
-                                                            <td>Mostafizur Rahman</td>
-                                                            <td >3500</td>
-                                                            <td class="center"><a class="transaction_history_preview">View</a></td>
-                                                            <td class="center"><a class="balance_history_preview">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td >8</td>
-                                                            <td>Rubel Hossain</td>
-                                                            <td >4000</td>
-                                                            <td class="center"><a class="transaction_history_preview">View</a></td>
-                                                            <td class="center"><a class="balance_history_preview">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td >9</td>
-                                                            <td>Liton Kumar Das</td>
-                                                            <td >4500</td>
-                                                            <td class="center"><a class="transaction_history_preview">View</a></td>
-                                                            <td class="center"><a class="balance_history_preview">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td >10</td>
-                                                            <td>Mushfiqur Rahim</td>
-                                                            <td >5000</td>
-                                                            <td class="center"><a class="transaction_history_preview">View</a></td>
-                                                            <td class="center"><a class="balance_history_preview">View</a></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 center-block pagination_pad">
-                                    <div class="pagination">
-                                        <ul class="pagination">
-                                            <li class="prev disabled">
-                                                <a href="#"> Previous</a>
-                                            </li>
-                                            <li class="active">
-                                                <a href="#">1</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">2</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">3</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">4</a>
-                                            </li>
-                                            <li class="next">
-                                                <a href="#">Next  </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                <?php $this->load->view('admin/report/show_subagents')?>
                             </div>
                         </div>
                     </div>
@@ -453,197 +209,7 @@
                                 <div class="box-header well">
                                     <h2><i class="glyphicon glyphicon-minus-sign"></i> Transaction History</h2>
                                 </div>
-                                <div class="content">
-                                    <div class="demo">
-                                        <div class="scrollbar-macosx">
-                                            <div class="scroll_top">
-                                            <div class="box-content">
-                                                <div class="row form-group">
-                                                    <div class="col-md-offset-1 col-md-3 pull-left">
-                                                        <label>
-                                                            <select class="form-control form_control_custom">
-                                                                <option selected="selected">Select an Agent</option>
-                                                                <option value="0">Nazmul Hasan</option>
-                                                                <option value="1">Alamgir Kabir</option>
-                                                                <option value="2">Mohammad Ali</option>
-                                                                <option value="3">Abdul Wadud</option>
-                                                                <option value="4">Omar Sany</option>
-                                                                <option value="5">Mohammad Ashraful</option>
-                                                                <option value="6">Aftab Ahmed</option>
-                                                                <option value="7">Mir Nasir Ali</option>
-                                                                <option value="8">Saddma Hossain</option>
-                                                                <option value="9">Abdur Rahim</option>
-                                                            </select>
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <label>
-                                                            <select class="form-control form_control_custom">
-                                                                <option selected="selected">Select a Sub-agents</option>
-                                                                <option value="0">Sakib Al Hasan</option>
-                                                                <option value="1">Tamim Iqbal</option>
-                                                                <option value="2">Sabbir Rahman</option>
-                                                                <option value="3">Mominul Haque</option>
-                                                                <option value="4">Souma Sarkar</option>
-                                                                <option value="5">Taskin Ahmed</option>
-                                                                <option value="6">Mostafizur Rahman</option>
-                                                                <option value="7">Rubel Hossain</option>
-                                                                <option value="8">Liton Kumar Das</option>
-                                                                <option value="9">Mushfiqur Rahim</option>
-                                                            </select>
-                                                        </label>
-                                                    </div>
-                                                   <div class="col-md-3">
-                                                        <label>
-                                                                <select class="form-control form_control_custom">
-                                                                    <option selected="selected">Select You</option>
-                                                                    <option value="0">Mashrafe Mortaza</option>
-                                                                    
-                                                                </select>
-                                                            </label>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-offset-1 col-md-2">
-                                                        <div class="start_datepicker">
-                                                            <p> <input type="text" id="transaction_history_start_datepicker" placeholder="Start Date"></p>
-                                                        </div>
-                                                    </div> 
-                                                    <div class="col-md-2">
-                                                        <div class="end_datepicker">
-                                                            <p> <input type="text" id="transaction_history_end_datepicker" placeholder="End Date"></p>
-                                                        </div>
-                                                    </div> 
-                                                    <div class="col-md-2">
-                                                        <input type="text" placeholder="Start Time">
-                                                    </div> 
-                                                    <div class="col-md-2">
-                                                        <input type="text" placeholder="End Time">
-                                                    </div> 
-                                                    <div class="col-md-2 pull-right">
-                                                        <a class="ajax-link">
-                                                            <input class="btn btn-sm btn-default" type="button" value="Search">
-                                                        </a>
-                                                    </div> 
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-offset-1 col-md-3">
-                                                        <input type="checkbox"> 
-                                                        <span style="vertical-align: top;">Show All</span>
-                                                    </div>
-                                                    <div class="col-md-7">
-                                                        <label>Nazmul Hasan</label>
-                                                    </div>
-                                                </div>
-                                                <table class="table table-striped table-bordered responsive">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Date</th>
-                                                            <th>Amount</th>
-                                                            <th>Mobile No</th>
-                                                            <th>Reference</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>28.10.15 <br> 10:00 Am</td>
-                                                            <td>100</td>
-                                                            <td>0123456789</td>
-                                                            <td>Ref 1</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>28.10.15 <br> 10:15 Am</td>
-                                                            <td>200</td>
-                                                            <td>1234567890</td>
-                                                            <td>Ref 2</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>28.10.15 <br> 10:30 Am</td>
-                                                            <td>300</td>
-                                                            <td>2345678901</td>
-                                                            <td>Ref 3</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>28.10.15 <br> 10:45 Am</td>
-                                                            <td>400</td>
-                                                            <td>3456789012</td>
-                                                            <td>Ref 4</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>28.10.15 <br> 11:00 Am</td>
-                                                            <td>500</td>
-                                                            <td>4567890123</td>
-                                                            <td>Ref 5</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>28.10.15 <br> 11:15 Am</td>
-                                                            <td>600</td>
-                                                            <td>5678901234</td>
-                                                            <td>Ref 6</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>28.10.15 <br> 11:30 Am</td>
-                                                            <td>700</td>
-                                                            <td>6789012345</td>
-                                                            <td>Ref 7</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>28.10.15 <br> 11.45 Am</td>
-                                                            <td>800</td>
-                                                            <td>7890123456</td>
-                                                            <td>Ref 8</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>28.10.15 <br> 12:00 Pm</td>
-                                                            <td>900</td>
-                                                            <td>8901234567</td>
-                                                            <td>Ref 9</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>28.10.15 <br> 12:15 Pm</td>
-                                                            <td>1000</td>
-                                                            <td>9012345678</td>
-                                                            <td>Ref 10</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="row">
-                                        <div class="col-md-offset-1 col-md-10">
-                                            Total Amount: 12500
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 center-block">
-
-                                        <div class=" pagination">
-                                            <ul class="pagination">
-                                                <li class="prev disabled">
-                                                    <a href="#"> Previous</a>
-                                                </li>
-                                                <li class="active">
-                                                    <a href="#">1</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">2</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">3</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">4</a>
-                                                </li>
-                                                <li class="next">
-                                                    <a href="#">Next  </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php $this->load->view('admin/report/show_transactions');?>
                             </div>
                         </div>
                     </div>
@@ -656,165 +222,9 @@
                         <div class="box box_height col-md-12">
                             <div class="box-inner">
                                 <div class="box-header well">
-                                    <h2><i class="glyphicon glyphicon-star"></i> Balance History</h2>
+                                    <h2><i class="glyphicon glyphicon-star"></i> Credit Transfer History</h2>
                                 </div>
-                                <div class="content">
-                                    <div class="demo">
-                                        <div class="scrollbar-macosx">
-                                            <div class="box-content">
-                                                <div class="row form-group">
-                                                    <div class="col-md-offset-1 col-md-5 pull-left">
-                                                        <label>
-                                                            <select class="form-control form_control_custom">
-                                                                <option selected="selected">Select an Agent</option>
-                                                                <option value="0">Nazmul Hasan</option>
-                                                                <option value="1">Alamgir Kabir</option>
-                                                                <option value="2">Mohammad Ali</option>
-                                                                <option value="3">Abdul Wadud</option>
-                                                                <option value="4">Omar Sany</option>
-                                                                <option value="5">Mohammad Ashraful</option>
-                                                                <option value="6">Aftab Ahmed</option>
-                                                                <option value="7">Mir Nasir Ali</option>
-                                                                <option value="8">Saddma Hossain</option>
-                                                                <option value="9">Abdur Rahim</option>
-                                                            </select>
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <label>
-                                                            <select class="form-control form_control_custom">
-                                                                <option selected="selected">Select a Sub-agents</option>
-                                                                <option value="0">Sakib Al Hasan</option>
-                                                                <option value="1">Tamim Iqbal</option>
-                                                                <option value="2">Sabbir Rahman</option>
-                                                                <option value="3">Mominul Haque</option>
-                                                                <option value="4">Souma Sarkar</option>
-                                                                <option value="5">Taskin Ahmed</option>
-                                                                <option value="6">Mostafizur Rahman</option>
-                                                                <option value="7">Rubel Hossain</option>
-                                                                <option value="8">Liton Kumar Das</option>
-                                                                <option value="9">Mushfiqur Rahim</option>
-                                                            </select>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-offset-1 col-md-2">
-                                                        <div class="start_datepicker">
-                                                            <p> <input type="text" id="balance_history_start_datepicker" placeholder="Start Date"></p>
-                                                        </div>
-                                                    </div> 
-                                                    <div class="col-md-2">
-                                                        <div class="end_datepicker">
-                                                            <p> <input type="text" id="balance_history_end_datepicker" placeholder="End Date"></p>
-                                                        </div>
-                                                    </div> 
-                                                    <div class="col-md-2">
-                                                        <input type="text" placeholder="Start Time">
-                                                    </div> 
-                                                    <div class="col-md-2">
-                                                        <input type="text" placeholder="End Time">
-                                                    </div> 
-                                                    <div class="col-md-2 pull-right">
-                                                        <a class="ajax-link">
-                                                            <input class="btn btn-sm btn-default" type="button" value="Search">
-                                                        </a>
-                                                    </div> 
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-offset-1 col-md-3">
-                                                        <input type="checkbox"> 
-                                                        <span style="vertical-align: top;">Show All</span>
-                                                    </div>
-                                                    <div class="col-md-7">
-                                                        <label>Alamgir Kabir</label>
-                                                    </div>
-                                                </div>
-                                                <table class="table table-striped table-bordered responsive">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Date</th>
-                                                            <th>Amount</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>28.10.15 <br> 10:00 Am</td>
-                                                            <td>100</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>28.10.15 <br> 10:15 Am</td>
-                                                            <td>200</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>28.10.15 <br> 10:30 Am</td>
-                                                            <td>300</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>28.10.15 <br> 10:45 Am</td>
-                                                            <td>400</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>28.10.15 <br> 11:00 Am</td>
-                                                            <td>500</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>28.10.15 <br> 11:15 Am</td>
-                                                            <td>600</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>28.10.15 <br> 11:30 Am</td>
-                                                            <td>700</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>28.10.15 <br> 11.45 Am</td>
-                                                            <td>800</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>28.10.15 <br> 12:00 Pm</td>
-                                                            <td>900</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>28.10.15 <br> 12:15 Pm</td>
-                                                            <td>1000</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="row">
-                                        <div class="col-md-offset-1 col-md-10">
-                                            Total Amount: 5500
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 center-block">
-                                        <div class=" pagination">
-                                            <ul class="pagination">
-                                                <li class="prev disabled">
-                                                    <a href="#"> Previous</a>
-                                                </li>
-                                                <li class="active">
-                                                    <a href="#">1</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">2</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">3</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">4</a>
-                                                </li>
-                                                <li class="next">
-                                                    <a href="#">Next  </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php $this->load->view('admin/report/show_credit_transfer'); ?>
                             </div>
                         </div>
                     </div>
@@ -827,120 +237,7 @@
                                 <div class="box-header well">
                                     <h2><i class="glyphicon glyphicon-plus-sign"></i> Sim Recharge History</h2>
                                 </div>
-                                <div class="content">
-                                    <div class="demo">
-                                        <div class="scrollbar-macosx">
-                                            <div class="box-content">
-
-                                                <div class="row">
-                                                    <div class="col-md-offset-1 col-md-3">
-                                                        <div class="start_datepicker">
-                                                            <p> <input type="text" id="sim_recharge_history_start_datepicker" placeholder="Start Date"></p>
-                                                        </div>
-                                                    </div> 
-                                                    <div class="col-md-3">
-                                                        <div class="end_datepicker">
-                                                            <p> <input type="text" id="sim_recharge_history_end_datepicker" placeholder="End Date"></p>
-                                                        </div>
-                                                    </div> 
-                                                    <div class="col-md-3">
-                                                        <a class="ajax-link">
-                                                            <input class="btn btn-sm btn-default" type="button" value="Search">
-                                                        </a>
-                                                    </div> 
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-offset-1 col-md-3">
-                                                        <input type="checkbox"> 
-                                                        <span style="vertical-align: top;">Show All</span>
-                                                    </div>
-                                                </div>
-                                                <table class="table table-striped table-bordered responsive">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Date</th>
-                                                            <th>Amount</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>28.10.15 </td>
-                                                            <td>10000</td>
-                                                        </tr>
-                                                        <tr>
-                                                           <td>27.10.15</td>
-                                                            <td>9000</td>
-                                                        </tr>
-                                                        <tr>
-                                                           <td>26.10.15 </td>
-                                                            <td>8000</td> 
-                                                        </tr>
-                                                         <tr>
-                                                            <td>25.10.15 </td>
-                                                            <td>7000</td>
-                                                        </tr>
-                                                         <tr>
-                                                            <td>24.10.15 </td>
-                                                            <td>6000</td>
-                                                        </tr>
-                                                        <tr>
-                                                             <td>23.10.15 </td>
-                                                            <td>5000</td>
-                                                        </tr>
-                                                        <tr>
-                                                           
-                                                            <td>22.10.15 </td>
-                                                            <td>4000</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>21.10.15 </td>
-                                                            <td>3000</td>
-                                                        </tr>
-                                                        <tr>
-                                                             <td>20.10.15 </td>
-                                                            <td>2000</td>
-                                                        </tr>
-                                                        <tr>
-                                                           <td>19.10.15 </td>
-                                                            <td>1000</td> 
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="row">
-                                        <div class="col-md-offset-1 col-md-10">
-                                            Total Amount: 55000
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 center-block">
-                                        <div class=" pagination">
-                                            <ul class="pagination">
-                                                <li class="prev disabled">
-                                                    <a href="#"> Previous</a>
-                                                </li>
-                                                <li class="active">
-                                                    <a href="#">1</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">2</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">3</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">4</a>
-                                                </li>
-                                                <li class="next">
-                                                    <a href="#">Next  </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php $this->load->view('admin/report/show_load_balance_history')?>                                
                             </div>
                         </div>
                     </div>

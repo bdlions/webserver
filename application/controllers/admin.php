@@ -4,7 +4,7 @@ class Admin extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model('transaction_model');
+        $this->load->library('transaction_library');
         $this->load->library('Utils');
     }
     public function index()
@@ -67,6 +67,12 @@ class Admin extends CI_Controller {
         $response = array(
             'message' => 'Credit is transferred successfully.'
         );
+        echo json_encode($response);
+    }
+    
+    public function get_load_balance_list()
+    {
+        $response = $this->transaction_library->get_load_balance_list();
         echo json_encode($response);
     }
 }

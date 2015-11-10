@@ -2,7 +2,7 @@
 class Transaction extends CI_Controller {
     function __construct() {
         parent::__construct();
-        $this->load->model('transaction_model');
+        $this->load->library('Transaction_library');
     }
     public function index()
     {
@@ -35,6 +35,23 @@ class Transaction extends CI_Controller {
             'message' => 'Transaction is executed successfully.'
         );
         echo json_encode($response);
+    }
+    
+    public function get_user_transaction_list()
+    {
+        $user_id = $this->input->post('user_id');
+        $response = $this->transaction_library->get_user_transaction_list($user_id);
+        echo json_encode($response);
+    }
+    
+    public function get_credit_transfer_list()
+    {
+        $user_id = $this->input->post('user_id');
+        $transaction_list = $this->transaction_library->get_credit_transfer_list($user_id);
+        $result = array(
+            'transaction_list' => $transaction_list
+        );
+        echo json_encode($result);
     }
     
     public function show_user_transactions($user_id = 0)

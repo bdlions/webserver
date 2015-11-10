@@ -64,6 +64,8 @@
         <script src="js/jquery.history.js"></script>
         <!-- application script for Charisma demo -->
         <script src="js/charisma.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>js/tmpl.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>js/tmpl.min.js"></script>
         <title>
             <?php
             if (empty($title)) {

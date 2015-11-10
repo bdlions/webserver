@@ -99,6 +99,24 @@ class User extends CI_Controller {
         echo json_encode($response);
     }
     
+    public function get_agent_current_balances()
+    {
+        $agent_list = $this->transaction_model->get_agents_current_balance()->result_array();
+        $result = array(
+            'agent_list' => $agent_list
+        );
+        echo json_encode($result);
+    }
+    public function get_subagent_current_balances()
+    {
+        $agent_user_id = $this->input->post('agent_user_id');
+        $subagent_list = $this->transaction_model->get_subagents_current_balance($agent_user_id)->result_array();
+        $result = array(
+            'subagent_list' => $subagent_list
+        );
+        echo json_encode($result);
+    }
+    
     public function show_agents()
     {
         print_r($this->user_model->get_all_agents()->result_array());
