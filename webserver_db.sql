@@ -169,19 +169,24 @@ CREATE TABLE IF NOT EXISTS `users_commissions` (
 ALTER TABLE `users_commissions`
   ADD CONSTRAINT `fk_users_commissions_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 INSERT INTO `users_commissions` (`id`, `user_id`, `service_id`, `commission`) VALUES
-(1, 2, 1, 1),
-(2, 3, 1, 1),
-(3, 4, 1, 1),
-(4, 5, 1, 3.8),
-(5, 6, 1, 3.8),
-(6, 7, 1, 3.8);
+(1, 2, 1, 4.5),
+(2, 3, 1, 3),
+(3, 4, 1, 3),
+(4, 5, 1, 2),
+(5, 6, 1, 2),
+(6, 7, 1, 2);
 
 CREATE TABLE IF NOT EXISTS `subagents` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `subagent_user_id` int(11) unsigned NOT NULL,
   `agent_user_id` int(11) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `fk_subagents_users1_idx` (subagent_user_id),
+  KEY `fk_subagents_users2_idx` (`agent_user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `subagents`
+  ADD CONSTRAINT `fk_subagents_users1` FOREIGN KEY (`subagent_user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_subagents_users2` FOREIGN KEY (`agent_user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 INSERT INTO `subagents` (`id`, `subagent_user_id`, `agent_user_id`) VALUES
 (1, 5,3),
 (2, 6,3),
@@ -218,25 +223,43 @@ CREATE TABLE IF NOT EXISTS `user_transactions` (
   `description` varchar(200),
   `balance_in` double,
   `balance_out` double,
-  `user_transaction_type_id` int(11) unsigned NOT NULL,
-  `user_transaction_status_id` int(11) unsigned NOT NULL,
+  `type_id` int(11) unsigned NOT NULL,
+  `status_id` int(11) unsigned NOT NULL,
   `created_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_user_transactions_users1_idx` (`user_id`),
+  KEY `fk_user_transactions_user_transaction_statuses1_idx` (`status_id`),
+  KEY `fk_user_transactions_user_transaction_types1_idx` (`type_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1; 
+ALTER TABLE `user_transactions`
+  ADD CONSTRAINT `fk_user_transactions_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_user_transactions_uts1` FOREIGN KEY (`status_id`) REFERENCES `user_transaction_statuses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_user_transactions_utt1` FOREIGN KEY (`type_id`) REFERENCES `user_transaction_types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  
+CREATE TABLE IF NOT EXISTS `service_charges` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `service_id` int(11) unsigned NOT NULL,
+  `unit` float DEFAULT 1000,
+  `company_charge` float DEFAULT 0,
+  `user_charge` float DEFAULT 0,
+  `created_on` int(11) unsigned DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1; 
-INSERT INTO `user_transactions` (`id`, `user_id`, `transaction_id`, `service_id`, `cell_no`, `description`, `balance_in`, `balance_out`, `user_transaction_type_id`, `user_transaction_status_id`, `created_on`) VALUES
-(1, 2, 't1', 1, '', '', 0, 60000, 1, 1, ''),
-(2, 3, 't1', 1, '', '', 60000, 0, 2, 1, ''),
-(3, 2, 't2', 1, '', '', 0, 40000, 1, 1, ''),
-(4, 4, 't2', 1, '', '', 40000, 0, 2, 1, ''),
-(5, 3, 't3', 1, '', '', 0, 10000, 1, 1, ''),
-(6, 5, 't3', 1, '', '', 10000, 0, 2, 1, ''),
-(7, 3, 't4', 1, '', '', 0, 20000, 1, 1, ''),
-(8, 6, 't4', 1, '', '', 20000, 0, 2, 1, ''),
-(9, 4, 't5', 1, '', '', 0, 15000, 1, 1, ''),
-(10, 7, 't5', 1, '', '', 15000, 0, 2, 1, ''),
-(11, 2, 't6', 1, '1234567', 'd1', 0, 200, 3, 1, ''),
-(12, 3, 't7', 1, '1234567', 'd2', 0, 190, 3, 1, ''),
-(13, 4, 't8', 1, '1234567', 'd3', 0, 180, 3, 1, ''),
-(14, 5, 't9', 1, '1234567', 'd4', 0, 170, 3, 1, ''),
-(15, 6, 't10', 1, '1234567', 'd5', 0, 160, 3, 1, ''),
-(16, 7, 't11', 1, '1234567', 'd6', 0, 150, 3, 1, '');
+INSERT INTO `service_charges` (`id`, `service_id`, `unit`, `company_charge`, `user_charge`) VALUES
+(1, 1, 1000, 14, 4.5);
+  
+CREATE TABLE IF NOT EXISTS `users_profits` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `transaction_id` varchar(20),
+  `service_id` int(11) unsigned NOT NULL,
+  `amount` float DEFAULT 0,
+  `admin_profit` float DEFAULT 0,
+  `agent_profit` float DEFAULT 0,
+  `subagent_profit` float DEFAULT 0,
+  `created_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_user_profits_users1_idx` (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1; 
+ALTER TABLE `users_profits`
+  ADD CONSTRAINT `fk_user_profits_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

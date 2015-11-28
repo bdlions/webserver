@@ -32,8 +32,8 @@ class User extends CI_Controller {
         $this->ion_auth->register($username, $password, $email, $additional_data);
         
         
-        $this->curl->create('http://localhost:5050/registermember?username='.$username.'&&subscribername='.ADMIN_USER_NAME);
-        //$this->curl->post(array("APIKey" => "key1", "amount" => $amount ));
+        $this->curl->create('http://localhost:4040/registermember');
+        $this->curl->post(array("username" => $username, "subscribername" => ADMIN_USER_NAME ));
         $this->curl->execute();
         
         $response = array(
@@ -58,7 +58,7 @@ class User extends CI_Controller {
         $groups = array(GROUP_ID_SUBAGENT);
         $this->ion_auth->register($username, $password, $email, $additional_data, $groups);
         
-        $this->curl->create('http://localhost:5050/registermember?username='.$username.'&&subscribername='.ADMIN_USER_NAME);
+        $this->curl->create('http://localhost:4040/registermember?username='.$username.'&&subscribername='.ADMIN_USER_NAME);
         //$this->curl->post(array("APIKey" => "key1", "amount" => $amount ));
         $this->curl->execute();
         
@@ -82,7 +82,8 @@ class User extends CI_Controller {
             'service_id' => SERVICE_TYPE_ID_BKASH_SEND_MONEY,
             'balance_out' => $amount,
             'balance_in' => 0,
-            'user_transaction_type_id' => TRANSACTION_TYPE_ID_SEND_CREDIT
+            'type_id' => TRANSACTION_TYPE_ID_SEND_CREDIT,
+            'status_id' => TRANSACTION_STATUS_ID_SUCCESSFUL
         );
         $this->transaction_model->add_transaction($agent_transaction_data);
         $subagent_transaction_data = array(
@@ -91,7 +92,8 @@ class User extends CI_Controller {
             'service_id' => SERVICE_TYPE_ID_BKASH_SEND_MONEY,
             'balance_in' => $amount,
             'balance_out' => 0,
-            'user_transaction_type_id' => TRANSACTION_TYPE_ID_RECEIVE_CREDIT
+            'type_id' => TRANSACTION_TYPE_ID_RECEIVE_CREDIT,
+            'status_id' => TRANSACTION_STATUS_ID_SUCCESSFUL
         );
         $this->transaction_model->add_transaction($subagent_transaction_data);
         

@@ -22,7 +22,7 @@
 <?php echo form_open("user/transfer_subagent_credit", array('id' => 'form_transfer_subagent_credit', 'class' => 'form-horizontal','onsubmit' => 'return false;')); ?>
 <div class="row form-group transfer_credit_pad">
     <div class="col-md-5">
-        Select Agent
+        Select Subagent
     </div>
     <div class="col-md-7">
         <?php echo form_dropdown('subagent_list', $subagent_list, '', 'class=form-control id=subagent_list'); ?>

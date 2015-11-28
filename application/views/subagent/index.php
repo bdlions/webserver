@@ -149,6 +149,7 @@
                 $("#nav_profit_summary").click(function() {
                     $('.display_hidden').css("display", "none");
                     $("#profit_summary").show();
+                    get_user_profit_list('<?php echo $user_info['user_id']?>');
                 });
 
 

@@ -6,7 +6,7 @@ class Transaction extends CI_Controller {
     }
     public function index()
     {
-            
+        $this->transaction_library->add_user_transaction(array());
     }
     
     public function add_transaction()
@@ -15,8 +15,9 @@ class Transaction extends CI_Controller {
         $amount = $this->input->post('add_transaction_amount');
         $cell_no = $this->input->post('add_transaction_cell_no');
         $description = $this->input->post('add_transaction_description');
-        $this->curl->create('http://localhost:3030/addtransaction?APIKey='.$api_key.'&&amount='.$amount.'&&cell_no='.$cell_no.'&&description='.$description);
-        //$this->curl->post(array("APIKey" => "key1", "amount" => $amount ));
+        
+        $this->curl->create('http://31.222.157.106:3030/addtransaction');
+        $this->curl->post(array("APIKey" => $api_key, "amount" => $amount, "cell_no" => $cell_no, "description" => $description ));
         $transaction_id = $this->curl->execute();
         
         $transaction_data = array(
@@ -27,10 +28,10 @@ class Transaction extends CI_Controller {
             'balance_out' => $amount,
             'cell_no' => $cell_no,
             'description' => $description,
-            'user_transaction_type_id' => TRANSACTION_TYPE_ID_USE_SERVICE,
-            'user_transaction_status_id' => TRANSACTION_STATUS_ID_SUCCESSFUL
+            'type_id' => TRANSACTION_TYPE_ID_USE_SERVICE,
+            'status_id' => TRANSACTION_STATUS_ID_SUCCESSFUL
         );
-        $this->transaction_model->add_transaction($transaction_data);
+        $this->transaction_library->add_user_transaction($transaction_data);
         
         $response = array(
             'message' => 'Transaction is executed successfully.'
@@ -42,6 +43,13 @@ class Transaction extends CI_Controller {
     {
         $user_id = $this->input->post('user_id');
         $response = $this->transaction_library->get_user_transaction_list($user_id);
+        echo json_encode($response);
+    }
+    
+    public function get_user_profit_list()
+    {
+        $user_id = $this->input->post('user_id');
+        $response = $this->transaction_library->get_user_profit_list($user_id);
         echo json_encode($response);
     }
     

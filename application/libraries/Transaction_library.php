@@ -11,6 +11,7 @@ class Transaction_library {
         $this->load->model('transaction_model');
         $this->load->model('user_model');
         $this->load->library('Date_utils');
+        $this->load->library('Ion_auth');
     }
 
     /**
@@ -40,6 +41,102 @@ class Transaction_library {
      */
     public function __get($var) {
         return get_instance()->$var;
+    }
+    
+    public function add_user_transaction($transaction_data)
+    {
+        //adding user transaction
+        $this->transaction_model->add_transaction($transaction_data);
+        //initializing user profit data
+        $user_profits = array(
+            'user_id' => $transaction_data['user_id'],
+            'transaction_id' => $transaction_data['transaction_id'],
+            'service_id' => SERVICE_TYPE_ID_BKASH_SEND_MONEY,
+            'amount' => $transaction_data['balance_out'],
+            'admin_profit' => 0,
+            'agent_profit' => 0,
+            'subagent_profit' => 0
+        );
+        //retrieving service charge info
+        $service_charge_info = array();
+        $service_charge_info_array = $this->transaction_model->get_service_charge_info(SERVICE_TYPE_ID_BKASH_SEND_MONEY)->result_array();
+        if(!empty($service_charge_info_array))
+        {
+            $service_charge_info = $service_charge_info_array[0];
+        }
+        
+        //retrieving user group
+        $user_group_id = 0; 
+        $user_group_array = $this->ion_auth->get_current_user_types();
+        foreach($user_group_array as $group_id => $name)
+        {
+            $user_group_id = $group_id;
+            break;
+        }
+        //calculating profit for transaction of admin
+        if($user_group_id == GROUP_ID_ADMIN)
+        {
+            $user_profits['admin_profit'] = ($user_profits['amount']/$service_charge_info['unit']) * $service_charge_info['user_charge']; 
+        }
+        else
+        {
+            //calculating profit for transaction of agent or subagent
+            $subagent_info = array();
+            $agent_user_id = 0;
+            $subagent_user_id = 0;
+            $agent_commission = 0;
+            $subagent_commission = 0;
+            //user id list to get commission info
+            $user_id_list = array();
+            if($user_group_id == GROUP_ID_AGENT)
+            {
+                $agent_user_id = $transaction_data['user_id'];
+                $user_id_list[] = $agent_user_id;
+            }
+            else if($user_group_id == GROUP_ID_SUBAGENT)
+            {
+                //retrieving subagent info
+                $subagent_info_array = $this->transaction_model->get_subagent_info($transaction_data['user_id'])->result_array();
+                if(!empty($subagent_info_array))
+                {
+                    $subagent_info = $subagent_info_array[0];
+                    $agent_user_id = $subagent_info['agent_user_id'];
+                    $subagent_user_id = $subagent_info['subagent_user_id'];
+                    $user_id_list[] = $agent_user_id;
+                    $user_id_list[] = $subagent_user_id;
+                }
+            }
+            if($user_group_id == GROUP_ID_AGENT || $user_group_id == GROUP_ID_SUBAGENT)
+            {
+                //retrieving commission info
+                $user_commission_array = $this->transaction_model->get_commission_users(SERVICE_TYPE_ID_BKASH_SEND_MONEY, $user_id_list)->result_array();
+                foreach($user_commission_array as $user_commission)
+                {
+                    if($user_commission['user_id'] == $agent_user_id)
+                    {
+                        $agent_commission = $user_commission['commission'];
+                    }
+                    if($user_commission['user_id'] == $subagent_user_id)
+                    {
+                        $subagent_commission = $user_commission['commission'];
+                    }
+                }
+            }
+            //calculating agent profit
+            if($user_group_id == GROUP_ID_AGENT)
+            {
+                $user_profits['admin_profit'] = ($user_profits['amount']/$service_charge_info['unit']) * ($service_charge_info['user_charge'] - $agent_commission); 
+                $user_profits['agent_profit'] = ($user_profits['amount']/$service_charge_info['unit']) * $agent_commission; 
+            }
+            //calculating subagent profit
+            if($user_group_id == GROUP_ID_SUBAGENT)
+            {
+                $user_profits['admin_profit'] = ($user_profits['amount']/$service_charge_info['unit']) * ($service_charge_info['user_charge'] - $agent_commission); 
+                $user_profits['agent_profit'] = ($user_profits['amount']/$service_charge_info['unit']) * ($agent_commission - $subagent_commission); 
+                $user_profits['subagent_profit'] = ($user_profits['amount']/$service_charge_info['unit']) * $subagent_commission; 
+            }
+        }
+        $this->transaction_model->add_user_profit($user_profits);        
     }
     
     public function get_load_balance_list()
@@ -74,6 +171,24 @@ class Transaction_library {
         $result = array(
             'total_amount' => $total_amount,
             'transaction_list' => $transaction_list
+        );
+        return $result;
+    }
+    
+    public function get_user_profit_list($user_id)
+    {
+        $profit_list = array();
+        $total_amount = 0;
+        $profit_list_array = $this->transaction_model->get_user_profit_list($user_id)->result_array();
+        foreach($profit_list_array as $profit_info)
+        {
+            $total_amount = $total_amount + $profit_info['amount'];
+            $profit_info['created_on'] = $this->date_utils->get_unix_to_human_date($profit_info['created_on']);
+            $profit_list[] = $profit_info;
+        }
+        $result = array(
+            'total_amount' => $total_amount,
+            'profit_list' => $profit_list
         );
         return $result;
     }

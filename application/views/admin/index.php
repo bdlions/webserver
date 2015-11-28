@@ -62,6 +62,10 @@
                 $("#nav_profit_summary").click(function() {
                     $('.display_hidden').css("display", "none");
                     $("#admin_profit_summary").show();
+                    $('#agent_list_profits').val('');
+                    $('#subagent_list_profits').val('');
+                    $('#admin_list_profits').val('<?php echo $user_info['user_id']?>');
+                    get_user_profit_list('<?php echo $user_info['user_id']?>');
                 });
                 $('.transaction_history_preview').click(function() {
                     $('.display_hidden').css("display", "none");

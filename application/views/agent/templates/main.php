@@ -3,11 +3,10 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Dedicated for selling textile product">
-        <meta name="author" content="Nazmul Hasan, Alamgir Kabir, Noor Alam, Ziaur Rahman">
+        <meta name="author" content="Nazmul Hasan, Alamgir Kabir">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="og:site_name" content="apurbobrand" />
-        <meta name="og:title" content="buy and sales" />
-        <meta name="og:description" content="soport website" />	
+        <meta name="og:title" content="bkash" />
+        <meta name="og:description" content="bkash" />	
         <meta name="keywords" content=""/>
         <!-- The styles -->
         <link id="bs-css" href="<?php echo base_url()?>css/bootstrap-cerulean.min.css" rel="stylesheet">
@@ -76,15 +75,7 @@
         <script src="js/charisma.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>js/tmpl.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>js/tmpl.min.js"></script>
-        <title>
-            <?php
-            if (empty($title)) {
-                echo "Sportzweb";
-            } else {
-                echo $title;
-            }
-            ?>
-        </title>
+        <title>BKASH</title>
     </head>
     <body>
         <?php $this->load->view('agent/templates/sections/header')?>

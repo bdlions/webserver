@@ -84,7 +84,7 @@
 
 
                 <!-- Profit Summary--> 
-                <div id="admin_profit_summary" class="row display_hidden">
+                <div id="agent_profit_summary" class="row display_hidden">
                     <div class="box box_height col-md-12">
                         <div class="box-inner">
                             <div class="box-header well">
@@ -194,7 +194,10 @@
 
             $("#nav_profit_summary").click(function() {
                 $('.display_hidden').css("display", "none");
-                $("#admin_profit_summary").show();
+                $("#agent_profit_summary").show();
+                $('#subagent_list_profits').val('');
+                $('#agent_list_profits').val('<?php echo $user_info['user_id']?>');
+                get_user_profit_list('<?php echo $user_info['user_id']?>');
             });
             $('.transaction_history_preview').click(function() {
                 $('.display_hidden').css("display", "none");
