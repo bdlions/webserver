@@ -4,10 +4,12 @@
             if($("#add_transaction_cell_no").val() === '')
             {
                alert("Please assign mobile number.");
+               return;
             }
             if($("#add_transaction_amount").val() === '' || $("#add_transaction_amount").val() <= 0)
             {
                alert("Please assign valid amount.");
+               return;
             }
             $.ajax({
                 dataType: 'json',

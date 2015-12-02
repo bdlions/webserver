@@ -40,7 +40,7 @@
                 <div>
                     <ul class="breadcrumb">
                         <li>
-                            Home
+                            Current Balance : <?php echo $current_balance;?>
                         </li>
                     </ul>
                 </div>

@@ -45,6 +45,8 @@ class Transaction_library {
     
     public function add_user_transaction($transaction_data)
     {
+        //??????of course handle database commit and roll back feature??????
+
         //adding user transaction
         $this->transaction_model->add_transaction($transaction_data);
         //initializing user profit data
@@ -277,6 +279,22 @@ class Transaction_library {
             'total_subagent_transactions_today' => $subagents_total_transactions_today
         );
         return $result;
+    }
+    
+    public function get_user_current_balance($user_id = 0)
+    {
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        }
+        $current_balance = 0;
+        $user_balance_array = $this->transaction_model->get_user_current_balance($user_id)->result_array();
+        if(!empty($user_balance_array))
+        {
+            $user_balance_info = $user_balance_array[0];
+            $current_balance = $user_balance_info['current_balance'];
+        }
+        return $current_balance;
     }
     
 }

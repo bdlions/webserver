@@ -70,6 +70,14 @@ class Transaction_model extends Ion_auth_model
             ->get();
     }
     
+    public function get_user_current_balance($user_id)
+    {
+        $this->db->where($this->tables['user_transactions'].'.user_id', $user_id);
+        return $this->db->select('user_id, sum(balance_in) - sum(balance_out) as current_balance')
+            ->from($this->tables['user_transactions'])
+            ->get();
+    }
+    
     public function get_load_balance_history()
     {
         $this->db->where('type_id', TRANSACTION_TYPE_ID_LOAD_BALANCE);
@@ -94,8 +102,9 @@ class Transaction_model extends Ion_auth_model
         $this->db->where('user_id', $user_id);
         $this->db->where('type_id', TRANSACTION_TYPE_ID_USE_SERVICE);
         $this->db->order_by('id','desc');
-        return $this->db->select($this->tables['user_transactions'].'.*')
+        return $this->db->select($this->tables['user_transactions'].'.*,'.$this->tables['user_transaction_statuses'].'.title as status')
             ->from($this->tables['user_transactions'])
+            ->join($this->tables['user_transaction_statuses'], $this->tables['user_transaction_statuses'] . '.id=' . $this->tables['user_transactions'] . '.status_id')
             ->get();
     }
     

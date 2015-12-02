@@ -49,6 +49,7 @@ $config['tables']['users_roles']                    = 'users_roles';
 $config['tables']['users_commissions']              = 'users_commissions';
 $config['tables']['subagents']                      = 'subagents';
 $config['tables']['user_transaction_types']         = 'user_transaction_types';
+$config['tables']['user_transaction_statuses']      = 'user_transaction_statuses';
 $config['tables']['user_transactions']              = 'user_transactions';
 $config['tables']['service_charges']                = 'service_charges';
 $config['tables']['users_profits']                  = 'users_profits';

@@ -42,12 +42,6 @@ class Auth extends CI_Controller {
                 if($group == ADMIN){
                     //set the flash data error message if there is one
                     $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-
-                    //list the users
-//                    $this->data['users'] = $this->ion_auth->users()->result();
-//                    foreach ($this->data['users'] as $k => $user) {
-//                        $this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
-//                    }    
                     
                     $this->data = array_merge($this->data, $this->transaction_library->get_dashboard_summary());
                     
@@ -59,7 +53,6 @@ class Auth extends CI_Controller {
                     }
                     $this->data['agent_list'] = $agent_list;
 
-                    //$this->_render_page('auth/index', $this->data);
                     $this->template->load(NULL, ADMIN_LOGIN_SUCCESS_VIEW, $this->data);
                     break;
                 }
@@ -77,6 +70,7 @@ class Auth extends CI_Controller {
                         $subagent_list[$subagent_info['user_id']] = $subagent_info['first_name'].' '.$subagent_info['last_name'];
                     }
                     $this->data['subagent_list'] = $subagent_list;
+                    $this->data['current_balance'] = $this->transaction_library->get_user_current_balance($agent_user_id);
                     $this->template->load(NULL, AGENT_LOGIN_SUCCESS_VIEW, $this->data);
                     break;
                 }

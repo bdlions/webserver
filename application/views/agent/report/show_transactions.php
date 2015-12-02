@@ -41,6 +41,7 @@
             <td>{%= transaction_info.balance_out %}</td>
             <td>{%= transaction_info.cell_no %}</td>
             <td>{%= transaction_info.description %}</td>
+             <td>{%= transaction_info.status %}</td>
         </tr>
     {% transaction_info = ((o instanceof Array) ? o[i++] : null); %}
     {% } %}
@@ -104,6 +105,7 @@
                             <th>Amount</th>
                             <th>Mobile No</th>
                             <th>Reference</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody id="tlbl_transaction_list">                        

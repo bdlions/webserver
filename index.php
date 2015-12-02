@@ -1,8 +1,9 @@
 <?php
 /***************** Custom constant **********************/
+include './constants/response_code.php';
+include './constants/configuration.php';
 include './constants/group.php';
 include './constants/service.php';
-include './constants/credential.php';
 include './constants/transaction.php';
 
 define('MEMBER', 'members');
